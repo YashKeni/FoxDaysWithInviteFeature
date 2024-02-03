@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d752081fda2e543862abc107caddce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toRecipient: yashkeni007@gmail.com
-  ccRecipient: yashkeni007@gmail.com
-  bccRecipient: yashkeni007@gmail.com
   subject: Invitation
   body: Hello, this is an invitation
+  toRecipientEmail: yashkeni007@gmail.com
+  ccRecipientEmail: yashkeni007@gmail.com
+  bccRecipientEmail: yashkeni007@gmail.com
