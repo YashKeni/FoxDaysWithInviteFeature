@@ -1,4 +1,4 @@
-Voxel Busters Interactive LLP Assignment Documentation 
+#**Voxel Busters Interactive LLP Assignment Documentation **
 
 The goal of the assignment is to create an invite feature using the ‘Cross-Platform Native Plugin: Essential Kit’ provided by Voxel Busters Interactive LLP. 
 
