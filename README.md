@@ -12,7 +12,7 @@ This ‘Invite’ button displays an address book with a list of contacts provid
 
  ![Screenshot 2024-02-03 163815](https://github.com/YashKeni/FoxDaysWithInviteFeature/assets/86158223/b41d81d1-0b98-48ba-bcd5-1862b4ee8ccf)
 
-As for the current situation of issue I faced is that I am unable to retrieve the email addresses. For that I just created a single ‘Invite’ button which when clicked opens the Mail App from Windows from which the user can send the mail. 
+Created a single ‘Invite’ button which when clicked opens the Mail App from Windows from which the user can send the mail. 
 
  
 
