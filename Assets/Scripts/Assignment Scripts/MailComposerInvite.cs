@@ -6,13 +6,8 @@ using VoxelBusters.EssentialKit;
 
 public class MailComposerInvite : MonoBehaviour
 {
-    // [SerializeField] string toRecipient;
-    // [SerializeField] string ccRecipient;
-    // [SerializeField] string bccRecipient;
-
     [SerializeField] string subject;
     [SerializeField] string body;
-    [SerializeField] string toRecipientEmail;
 
     bool canSendMail = MailComposer.CanSendMail();
 
@@ -28,16 +23,40 @@ public class MailComposerInvite : MonoBehaviour
 
     public void SendTextMail()
     {
-        MailComposer composer = MailComposer.CreateInstance();
-        composer.SetToRecipients(toRecipientEmail);
+        IAddressBookContact[] addressContacts = AddressBookService.instance.addressContacts;
 
-        composer.SetSubject(subject);
-        composer.SetBody(body, false);
-        composer.SetCompletionCallback((result, error) =>
+        if (addressContacts != null && addressContacts.Length > 0)
         {
-            Debug.Log("Mail composer was closed. Result code: " + result.ResultCode);
-        });
-        composer.Show();
+            // Create an instance of the mail composer
+            MailComposer composer = MailComposer.CreateInstance();
+
+            // Set the recipients from the address book
+            List<string> toRecipients = new List<string>();
+            foreach (var contact in addressContacts)
+            {
+                // Check if the contact has an email address
+                if (contact.EmailAddresses != null && contact.EmailAddresses.Length > 0)
+                {
+                    toRecipients.Add(contact.EmailAddresses[0]);
+                }
+            }
+
+            // Set other mail composer properties
+            composer.SetToRecipients(toRecipients.ToArray());
+            composer.SetSubject(subject);
+            composer.SetBody(body, false);
+            composer.SetCompletionCallback((result, error) =>
+            {
+                Debug.Log("Mail composer was closed. Result code: " + result.ResultCode);
+            });
+
+            // Show the mail composer
+            composer.Show();
+        }
+        else
+        {
+            Debug.Log("No contacts available to send mail to.");
+        }
 
     }
 }
