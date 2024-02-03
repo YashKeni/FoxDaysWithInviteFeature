@@ -12,6 +12,7 @@ public class MailComposerInvite : MonoBehaviour
 
     [SerializeField] string subject;
     [SerializeField] string body;
+    [SerializeField] string toRecipientEmail;
 
     bool canSendMail = MailComposer.CanSendMail();
 
@@ -27,34 +28,16 @@ public class MailComposerInvite : MonoBehaviour
 
     public void SendTextMail()
     {
-        IAddressBookContact[] addressContacts = AddressBookService.instance.addressContacts;
+        MailComposer composer = MailComposer.CreateInstance();
+        composer.SetToRecipients(toRecipientEmail);
 
-        if (addressContacts != null && addressContacts.Length > 0)
+        composer.SetSubject(subject);
+        composer.SetBody(body, false);
+        composer.SetCompletionCallback((result, error) =>
         {
-            MailComposer composer = MailComposer.CreateInstance();
-
-            List<string> toRecipients = new List<string>();
-            foreach (var contact in addressContacts)
-            {
-                if (contact.EmailAddresses != null && contact.EmailAddresses.Length > 0)
-                {
-                    toRecipients.Add(contact.EmailAddresses[0]);
-                }
-            }
-            composer.SetToRecipients(toRecipients.ToArray());
-
-            composer.SetSubject(subject);
-            composer.SetBody(body, false);
-            composer.SetCompletionCallback((result, error) =>
-            {
-                Debug.Log("Mail composer was closed. Result code: " + result.ResultCode);
-            });
-            composer.Show();
-        }
-        else
-        {
-            Debug.Log("No Contacts Available");
-        }
+            Debug.Log("Mail composer was closed. Result code: " + result.ResultCode);
+        });
+        composer.Show();
 
     }
 }

@@ -75,16 +75,17 @@ public class AddressBookService : MonoBehaviour
         }
     }
 
+    // This codeblock is used to display the address book on to a UI element.
     private void UpdateContactDisplay()
     {
-        string displayText = "Sr.No. FirstName LastNames PhoneNumber Email\n\n";
+        string displayText = "Sr.No. FirstName LastNames PhoneNumber\n\n";
 
         for (int iter = 0; iter < addressContacts.Length && iter < 10; iter++)
         {
             string emailAddresses = string.Join(", ", addressContacts[iter].EmailAddresses);
             string phoneNumbers = string.Join(", ", addressContacts[iter].PhoneNumbers);
 
-            displayText += $"{iter + 1}. {addressContacts[iter].FirstName} {addressContacts[iter].LastName} {phoneNumbers} {emailAddresses}\n";
+            displayText += $"{iter + 1}. {addressContacts[iter].FirstName} {addressContacts[iter].LastName} {phoneNumbers}\n";
         }
         contactDisplayText.text = displayText;
     }
